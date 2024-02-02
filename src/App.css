@@ -2,37 +2,208 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #2ca;
+  height: 5%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   font-size: calc(10px + 2vmin);
+  padding: 10px;
+}
+
+.logo {
+  width: calc(50px + 2vmin);
+  height: calc(30px + 2vmin);
+}
+
+.Container {
+  display: flex;
+}
+
+.Heading-container {
+  flex: 1;
+  background-color: rgb(104, 30, 188);
+}
+
+.Content-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.content-open {
+  margin-left: 20%; /* Same as the sidebar's open width */
+}
+
+.content-closed {
+  margin-left: 0; /* No margin when the sidebar is closed */
+}
+
+.sidebar {
+  position: fixed;
+  height: 100%;
+  background-color: #333;
+  color: #fff;
+  transition: 0.5s ease;
+  top: 7.8%;
+}
+
+.sidebar.open {
+  display: flex;
+  padding: 10px;
+  left: 0;
+  width: 20%;
+  flex-direction: column;
+}
+
+.sidebar.closed {
+  left: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.close-button {
+  display: none;
+}
+
+.toggle-button {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  padding-left: 10px;
+}
+
+.Chat-container {
+  width: 80%;
+  height: 80vh;
+  margin-top: 10%;
+  padding: 20px;
+}
+
+/* Dropdown container */
+.dropdown {
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden; /* Ensures that the overflow content is not visible */
+}
+
+/* Dropdown button */
+.dropdown-button {
+  background-color: transparent; /* A cool green */
   color: white;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-size: 1rem; /* Responsive font size */
 }
 
-.App-link {
-  color: #61dafb;
+.dropdown-content {
+  color: #fff;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out; /* Smooth transition for max-height */
+  max-height: 0; /* Start collapsed */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* When dropdown is open */
+.dropdown-content.open {
+  max-height: 100%; /* Adjust based on the content size */
+  /* Removed display: block; to rely on max-height for animation */
+}
+
+/* Dropdown item */
+.dropdown-item {
+  color: #fff;
+  cursor: pointer;
+  padding: 12px 16px;
+  text-decoration: none;
+  text-align: left;
+  display: block; /* Ensure items are stacked vertically */
+}
+
+/* Hover effect for dropdown item */
+.dropdown-item:hover {
+  background-color: #ddd;
+}
+
+/* MenuIcon.css */
+.container {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.bar1,
+.bar2,
+.bar3 {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  margin: 5px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  transform: translate(0, 8px) rotate(-45deg);
+}
+
+.change .bar2 {
+  opacity: 0;
+}
+
+.change .bar3 {
+  transform: translate(0, -8px) rotate(45deg);
+}
+
+@media screen and (max-width: 620px) {
+  .sidebar.open {
+    width: 230px;
+    left: 0;
+    padding: 10px;
   }
-  to {
-    transform: rotate(360deg);
+
+  /* .sidebar.mobile {
+    width: 230px;
+    left: 0;
+    padding: 10px;
+  }
+
+  .sidebar.desktop {
+    width: 0;
+  } */
+
+  .content-open {
+    margin-left: 0; /* Match the sidebar's width in mobile view */
+  }
+
+  .sidebar {
+    padding: 0;
+  }
+
+  .toggle-button {
+    display: block;
+  }
+
+  .close-button {
+    display: none;
+    padding: 10px;
+  }
+
+  .Chat-container {
+    width: 90%;
+  }
+
+  .dropdown-button,
+  .dropdown-item {
+    font-size: 0.9rem; /* Smaller font size on mobile */
   }
 }
