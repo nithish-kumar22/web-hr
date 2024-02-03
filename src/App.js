@@ -2,13 +2,24 @@ import logo from "./logo.svg";
 import { useState, useEffect } from "react";
 import "./App.css";
 import { IoMenuSharp, IoCloseSharp } from "react-icons/io5";
-
+import { MdExpandMore } from "react-icons/md";
 const App = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    // setWindowWidth(window.innerWidth);
+    fetch(`/Declaration.html`)
+      .then((response) => response.text())
+      .then((data) => setHtmlContent(data))
+      .catch((error) => console.error("Error loading HTML:", error));
+  }, []);
+
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
   const [contentState, setContentState] = useState("");
   const [isActive, setIsActive] = useState(true);
   const [htmlContent, setHtmlContent] = useState("");
   const [subheadingName, setSubheadingName] = useState("");
+  const [isSelected, setSelected] = useState(null);
   // const [sideBarMobile, setSidebarMobile] = useState(false);
   const [dropdownsState, setDropdownsState] = useState([
     {
@@ -24,6 +35,7 @@ const App = () => {
           "Equal Opportunity",
           "Terms of Employment",
           "Confidentiality",
+          "Organization Chart",
         ],
       },
     },
@@ -47,17 +59,139 @@ const App = () => {
         ],
       },
     },
-    // Add more dropdowns as needed
+    {
+      heading: {
+        title: "Code Of Conduct, Ethics & Disciplinary Action",
+        subheadings: [
+          "Protection & Proper Use Of Assets",
+          "Drugs Alcohol Smoking Weapons",
+          "Conduct Rules",
+          "Rules on Disciplinary Action",
+        ],
+      },
+    },
+    {
+      heading: {
+        title: "Sexual Harassment Policy",
+        subheadings: [
+          "Scope",
+          "Definitions",
+          "Complaints Procedure",
+          "Redressal Process",
+          "Internal Complaints Committee",
+        ],
+      },
+    },
+    {
+      heading: {
+        title: "Leave & Attendance",
+        subheadings: [
+          "Office Hours",
+          "Permission",
+          "On Duty",
+          "Procedure For Granting Leave",
+          "Kinds of Leave",
+          "Public Holidays And Restricted Holidays",
+          "Leave Administration",
+        ],
+      },
+    },
+    {
+      heading: {
+        title: "Compensation And Benefits",
+        subheadings: [
+          "Pay Day & Pay Cycle",
+          "Cost To The Company",
+          "Tax Compliance",
+          "Provident Fund",
+          "Employee State Insurance",
+          "Overtime",
+          "Loan Policy",
+          "Salary Advance Policy",
+          "Medical Insurance Policy",
+          "Marriage Gift Policy",
+        ],
+      },
+    },
+    {
+      heading: {
+        title: "Performance Appraisal",
+        subheadings: ["Performance Review"],
+      },
+    },
+    {
+      heading: {
+        title: "Travel And Conveyance",
+        subheadings: [
+          "Mode And Class Of Travel",
+          "Local Travel",
+          "Interstate - Food Allowance",
+          "Intercity - Food Allowance",
+          "Accommodation & Lodging",
+        ],
+      },
+    },
+    {
+      heading: {
+        title: "Training & Development Policy",
+        subheadings: [
+          "Objectives & Scope",
+          "Types Of Training",
+          "Mode & Process Of Training",
+          "Ideal Training Plan For A Calendar Year",
+        ],
+      },
+    },
+    {
+      heading: {
+        title: "Safety, Health And Environment",
+        subheadings: [
+          "Legal Compliance",
+          "Training & Awareness",
+          "Personal Protective Equipment",
+        ],
+      },
+    },
+    {
+      heading: {
+        title: "IT Policy",
+        subheadings: [
+          "Entitlement",
+          "IT Security",
+          "Loss Or Damage",
+          "Separation Or Transfer",
+          "Replacement",
+          "Specification Of Laptop",
+          "Brands",
+          "Cost Factor",
+        ],
+      },
+    },
+    {
+      heading: {
+        title: "Forms & Annexures",
+        subheadings: ["Manpower Requisition Form"],
+      },
+    },
   ]);
 
   const Dropdown = ({ label, items }) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const handleToggle = () => setIsOpen(!isOpen);
+    const handleToggle = () => {
+      setIsOpen(!isOpen);
+    };
 
     return (
       <div className="dropdown">
-        <button className="dropdown-button" onClick={handleToggle}>
+        <button
+          onClick={() => {
+            handleToggle();
+          }}
+          className={`dropdown-button ${
+            isOpen === true ? "changeFontColor" : ""
+          } `}
+        >
           {label}
         </button>
         <div className={`dropdown-content ${isOpen ? "open" : ""}`}>
@@ -114,13 +248,11 @@ const App = () => {
             isSideBarOpen={isSideBarOpen}
           />
         </div>
-        {/* <IoMenuSharp
-          className="toggle-button"
-          onClick={() => toggleSidebar()}
-          color="#000"
-          size={35}
-        /> */}
-        <img src={require("./assets/logo.jpg")} className="logo" />
+
+        <div className="detail">
+          <img src={require("./assets/gp_logo.webp")} className="logo" />
+          <p className="emp">Employee Policies</p>
+        </div>
       </header>
       <div className="Container">
         <div className={`sidebar ${isSideBarOpen ? "open" : "closed"}`}>
@@ -144,7 +276,10 @@ const App = () => {
           }`}
         >
           <div className="Chat-container">
-            <p dangerouslySetInnerHTML={{ __html: htmlContent }}></p>
+            <div
+              className="custom-font"
+              dangerouslySetInnerHTML={{ __html: htmlContent }}
+            ></div>
           </div>
         </div>
       </div>
