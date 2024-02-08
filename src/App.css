@@ -1,265 +1,63 @@
-.App {
-  text-align: center;
-}
-
-.App-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: #0d1430;
-  height: 5%;
-  display: flex;
-  align-items: center;
-  font-size: calc(10px + 2vmin);
-  padding: 10px;
-  z-index: 2;
-}
-
-.emp {
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: #fff;
-  margin-left: 4%;
-}
-
-.logo {
-  width: calc(80px + 2vmin);
-  height: calc(50px + 2vmin);
-}
-
-.detail {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-}
-
-.Container {
-  display: flex;
-}
-
-.Heading-container {
-  flex: 1;
-  background-color: rgb(104, 30, 188);
-}
-
-.Content-container {
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* background-image: url("/src/assets/corn.webp");
-  background-repeat: no-repeat;
-  opacity: 0.5; */
-}
-
-.content-open {
-  margin-left: 20%; /* Same as the sidebar's open width */
-}
-
-.content-closed {
-  margin-left: 0; /* No margin when the sidebar is closed */
-}
-
-.sidebar {
-  position: fixed;
-  height: 100%;
-  background-color: #f6f6f6;
-  color: #0d1430;
-  transition: 0.5s ease;
-  top: 7.8%;
-  box-shadow: 2px 2px 8px rgba(13, 20, 48, 0.3);
-}
-
-.sidebar.open {
-  display: flex;
-  padding: 10px;
-  left: 0;
-  width: 20%;
-  flex-direction: column;
-  overflow-y: auto;
-}
-
-.sidebar.closed {
-  left: 0;
-  width: 0;
-  overflow: hidden;
-}
-
-.close-button {
-  display: none;
-}
-
-.toggle-button {
-  display: none;
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  color: #0d1430;
-
-  padding-left: 10px;
-}
-
-.Chat-container {
-  width: 80%;
-  height: 80vh;
-  margin-top: 10%;
-  border-radius: 30px;
-}
-
-/* Dropdown container */
-.dropdown {
-  margin: 5px 0;
-  border-radius: 5px;
-}
-
-.dropdownLogo1 {
-  width: 2px;
-  height: 10px;
-  background-color: "#000";
-  color: "#000";
-  transform: rotate(45deg);
-}
-
-.dropdownLogo2 {
-  width: 2px;
-  height: 10px;
-  background-color: "#000";
-  transform: rotate(-45deg);
-}
-/* Dropdown button */
-.dropdown-button {
-  background-color: transparent;
-  color: #0d1430;
-  padding: 10px;
-  width: 100%;
-  text-align: left;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  font-size: 1rem;
-  /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
-}
-
-.dropdown-button:hover {
-  background-color: #0d1430;
-  color: #fff;
-  border-radius: 6px;
-}
-
-.changeFontColor {
-  font-weight: 800;
-}
-
-.dropdown-content {
-  color: #fff;
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.5s ease-out;
-}
-
-.dropdown-content.open {
-  max-height: 100%;
-  transition: max-height 0.5s ease-out;
-}
-
-.dropdown-item {
-  color: #0d1430;
-  cursor: pointer;
-  padding: 12px 16px;
-  text-decoration: none;
-  text-align: left;
-  margin-left: 15px;
-  display: block;
-}
-
-.dropdown-item:hover {
-  background-color: #ddd;
-  border-radius: 6px;
-}
-
-.container {
-  display: inline-block;
-  cursor: pointer;
-}
-
-.bar1,
-.bar2,
-.bar3 {
-  width: 25px;
-  height: 3px;
+  height: 100vh;
   background-color: #fff;
-  margin: 5px 0;
-  transition: 0.4s;
 }
 
-.change .bar1 {
-  transform: translate(0, 8px) rotate(-45deg);
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
+  width: 30%;
+  background-color: #0d1430;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  flex-direction: column;
 }
 
-.change .bar2 {
-  opacity: 0;
+.login-container input {
+  outline: none;
+  padding: 0.5rem;
+  border-radius: 6px;
+  width: 50%;
+  margin: 1rem;
 }
 
-.change .bar3 {
-  transform: translate(0, -8px) rotate(45deg);
+.login-container input[type="number"]:focus {
+  outline: none;
+  border-color: #007bff; /* Change to your preferred focus color */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle shadow */
+}
+
+.login-text {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #ccc;
+  justify-content: flex-end;
+}
+
+.login-button {
+  width: 55%;
+  cursor: pointer;
+  background-color: #deae52;
+  padding: 0.5rem;
+  border-radius: 6px;
+  color: #0d1430;
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 1rem;
+}
+
+.login-button:hover {
+  background-color: #c6812b;
 }
 
 @media screen and (max-width: 620px) {
-  .sidebar.open {
-    width: 230px;
-    left: 0;
-    padding: 10px;
-  }
-
-  /* .sidebar.mobile {
-    width: 230px;
-    left: 0;
-    padding: 10px;
-  }
-
-  .sidebar.desktop {
-    width: 0;
-  } */
-
-  .content-open {
-    margin-left: 0; /* Match the sidebar's width in mobile view */
-  }
-
-  .sidebar {
-    padding: 0;
-  }
-
-  .toggle-button {
-    display: block;
-  }
-
-  .close-button {
-    display: none;
-    padding: 10px;
-  }
-
-  .Chat-container {
-    width: 90%;
-    margin-top: 20%;
-  }
-
-  .custom-font {
-    font-family: "Times New Roman", Times, serif;
-    font-weight: 800;
-    color: #2ca;
-  }
-
-  .dropdown-button,
-  .dropdown-item {
-    font-size: 0.9rem; /* Smaller font size on mobile */
-  }
-  .detail {
-    margin-left: 15%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  .login-container {
+    width: 85%;
   }
 }

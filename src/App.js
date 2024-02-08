@@ -1,287 +1,63 @@
-import logo from "./logo.svg";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import { IoMenuSharp, IoCloseSharp } from "react-icons/io5";
-import { MdExpandMore } from "react-icons/md";
+import { response } from "express";
 const App = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [text, setText] = useState("Send OTP");
+  const [OTPSent, setOTPSent] = useState(false);
+  const [otp, setOTP] = useState(null);
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    // setWindowWidth(window.innerWidth);
-    fetch(`/Declaration.html`)
-      .then((response) => response.text())
-      .then((data) => setHtmlContent(data))
-      .catch((error) => console.error("Error loading HTML:", error));
-  }, []);
+    // fetch("http://localhost:5000/api/post", {
+    //   method: "POST",
+    //   body: JSON.stringify({ number: mobileNumber }),
+    // })
+    //   .then((response) => {
+    //     response.text();
+    //   })
+    //   .then((data) => console.log(data))
+    //   .catch((err) => console.log(err));
+  });
 
-  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
-  const [contentState, setContentState] = useState("");
-  const [isActive, setIsActive] = useState(true);
-  const [htmlContent, setHtmlContent] = useState("");
-  const [subheadingName, setSubheadingName] = useState("");
-  const [isSelected, setSelected] = useState(null);
-  // const [sideBarMobile, setSidebarMobile] = useState(false);
-  const [dropdownsState, setDropdownsState] = useState([
-    {
-      heading: {
-        title: "General",
-        subheadings: [
-          "Declaration",
-          "About Gourmet Popcornica LLP",
-          "Vision",
-          "Mission",
-          "Values",
-          "Introduction",
-          "Equal Opportunity",
-          "Terms of Employment",
-          "Confidentiality",
-          "Organization Chart",
-        ],
-      },
-    },
-    {
-      heading: {
-        title: "Recruitment Policy",
-        subheadings: [
-          "Manpower Requisition",
-          "Advertisement",
-          "Processing of Applications",
-          "Interview Panel",
-          "Interview & Selection",
-          "Conveyance reimbursements for Candidates",
-          "Final Selection",
-          "Joining Procedure",
-          "Payment of Salary",
-          "Deductions from salary",
-          "Identity card",
-          "Appointment",
-          "Internship",
-        ],
-      },
-    },
-    {
-      heading: {
-        title: "Code Of Conduct, Ethics & Disciplinary Action",
-        subheadings: [
-          "Protection & Proper Use Of Assets",
-          "Drugs Alcohol Smoking Weapons",
-          "Conduct Rules",
-          "Rules on Disciplinary Action",
-        ],
-      },
-    },
-    {
-      heading: {
-        title: "Sexual Harassment Policy",
-        subheadings: [
-          "Scope",
-          "Definitions",
-          "Complaints Procedure",
-          "Redressal Process",
-          "Internal Complaints Committee",
-        ],
-      },
-    },
-    {
-      heading: {
-        title: "Leave & Attendance",
-        subheadings: [
-          "Office Hours",
-          "Permission",
-          "On Duty",
-          "Procedure For Granting Leave",
-          "Kinds of Leave",
-          "Public Holidays And Restricted Holidays",
-          "Leave Administration",
-        ],
-      },
-    },
-    {
-      heading: {
-        title: "Compensation And Benefits",
-        subheadings: [
-          "Pay Day & Pay Cycle",
-          "Cost To The Company",
-          "Tax Compliance",
-          "Provident Fund",
-          "Employee State Insurance",
-          "Overtime",
-          "Loan Policy",
-          "Salary Advance Policy",
-          "Medical Insurance Policy",
-          "Marriage Gift Policy",
-        ],
-      },
-    },
-    {
-      heading: {
-        title: "Performance Appraisal",
-        subheadings: ["Performance Review"],
-      },
-    },
-    {
-      heading: {
-        title: "Travel And Conveyance",
-        subheadings: [
-          "Mode And Class Of Travel",
-          "Local Travel",
-          "Interstate - Food Allowance",
-          "Intercity - Food Allowance",
-          "Accommodation & Lodging",
-        ],
-      },
-    },
-    {
-      heading: {
-        title: "Training & Development Policy",
-        subheadings: [
-          "Objectives & Scope",
-          "Types Of Training",
-          "Mode & Process Of Training",
-          "Ideal Training Plan For A Calendar Year",
-        ],
-      },
-    },
-    {
-      heading: {
-        title: "Safety, Health And Environment",
-        subheadings: [
-          "Legal Compliance",
-          "Training & Awareness",
-          "Personal Protective Equipment",
-        ],
-      },
-    },
-    {
-      heading: {
-        title: "IT Policy",
-        subheadings: [
-          "Entitlement",
-          "IT Security",
-          "Loss Or Damage",
-          "Separation Or Transfer",
-          "Replacement",
-          "Specification Of Laptop",
-          "Brands",
-          "Cost Factor",
-        ],
-      },
-    },
-    {
-      heading: {
-        title: "Forms & Annexures",
-        subheadings: ["Manpower Requisition Form"],
-      },
-    },
-  ]);
-
-  const Dropdown = ({ label, items }) => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const handleToggle = () => {
-      setIsOpen(!isOpen);
-    };
-
-    return (
-      <div className="dropdown">
-        <button
-          onClick={() => {
-            handleToggle();
-          }}
-          className={`dropdown-button ${
-            isOpen === true ? "changeFontColor" : ""
-          } `}
-        >
-          {label}
-        </button>
-        <div className={`dropdown-content ${isOpen ? "open" : ""}`}>
-          {items.map((item, index) => (
-            <div
-              key={index}
-              className={`dropdown-item`}
-              onClick={() => {
-                // setIsSideBarOpen(!isSideBarOpen);
-                changeFile(item);
-                console.log(subheadingName);
-              }}
-            >
-              {item}
-            </div>
-          ))}
-        </div>
-      </div>
-    );
+  const sendOTP = () => {
+    if (mobileNumber !== "" && mobileNumber.length === 10) {
+      setOTPSent(true);
+      setText("Login");
+      setError("");
+    } else {
+      setError("Enter valid mobile number");
+    }
   };
 
-  const changeFile = (subheadingName) => {
-    console.log(subheadingName);
-    fetch(`/${subheadingName}.html`)
-      .then((response) => response.text())
-      .then((data) => setHtmlContent(data))
-      .catch((error) => console.error("Error loading HTML:", error));
-  };
-
-  const MenuIcon = ({ setIsSideBarOpen, isSideBarOpen }) => {
-    const toggleClass = () => {
-      setIsActive(!isActive);
-      setIsSideBarOpen(!isSideBarOpen);
-    };
-
-    return (
-      <div
-        className={`container ${isActive ? "change" : ""}`}
-        onClick={() => toggleClass()}
-      >
-        <div className="bar1"></div>
-        <div className="bar2"></div>
-        <div className="bar3"></div>
-      </div>
-    );
+  const handleMobileNumberChange = (event) => {
+    setMobileNumber(event.target.value);
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="toggle-button">
-          <MenuIcon
-            setIsSideBarOpen={setIsSideBarOpen}
-            isSideBarOpen={isSideBarOpen}
+    <div className="container">
+      <div className="login-container">
+        <img
+          src={require("./assets/gp_logo.webp")}
+          style={{ width: 100, height: 70 }}
+        />
+        <p className="login-text">Login</p>
+        <input
+          placeholder="Enter mobile number"
+          type="tel"
+          onChange={handleMobileNumberChange}
+        />
+        {error !== "" && <p style={{ color: "red" }}>{error}</p>}
+        {OTPSent && (
+          <input
+            placeholder="Enter OTP"
+            type="tel"
+            onChange={(text) => setOTP(text)}
           />
-        </div>
-
-        <div className="detail">
-          <img src={require("./assets/gp_logo.webp")} className="logo" />
-          <p className="emp">Employee Policies</p>
-        </div>
-      </header>
-      <div className="Container">
-        <div className={`sidebar ${isSideBarOpen ? "open" : "closed"}`}>
-          {/* <IoCloseSharp
-            className="close-button"
-            onClick={() => toggleSidebar()}
-            color="#fff"
-            size={35}
-          /> */}
-          {dropdownsState.map((dropdown, index) => (
-            <Dropdown
-              key={index}
-              label={dropdown.heading.title}
-              items={dropdown.heading.subheadings}
-            />
-          ))}
-        </div>
-        <div
-          className={`Content-container ${
-            isSideBarOpen ? "content-open" : "content-closed"
-          }`}
-        >
-          <div className="Chat-container">
-            <div
-              className="custom-font"
-              dangerouslySetInnerHTML={{ __html: htmlContent }}
-            ></div>
-          </div>
-        </div>
+        )}
+        <button className="login-button" onClick={() => sendOTP()}>
+          {text}
+        </button>
       </div>
     </div>
   );
